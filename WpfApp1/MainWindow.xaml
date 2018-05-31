@@ -4,132 +4,141 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApp1"
+        xmlns:vm="clr-namespace:WpfApp1.ViewModel"
         mc:Ignorable="d"
         Title="Giorka" Height="700" Width="900" ResizeMode="NoResize">
 
+        <Grid Background="White" >
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width ="600" />
+            <ColumnDefinition Width ="Auto" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
 
-    <Border Padding="10" Background="#FFA6A6A6">
-        <StackPanel Background="White" >
+        <!-- Statistics -->
+        <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Height="100" VerticalAlignment="Top">
+            <Grid.DataContext>
+                <vm:GraViewModel/>
+            </Grid.DataContext>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width ="*" />
+                <ColumnDefinition Width ="*" />
+                <ColumnDefinition Width ="*" />
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Column="0" Text="{Binding DayInGame}" 
+                       FontSize="40" HorizontalAlignment="Center" VerticalAlignment="Center" />
+            <Button Name="NextDayButton"  Grid.Column="1" Margin="20" Content="Next Day" FontSize="30"/>
+            <TextBlock Grid.Column="2"  Text="{Binding MoneyInGame}" 
+                       FontSize="40" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+        </Grid>
 
-            <!-- Statistics -->
+        <!-- Map -->
+        <Grid Grid.Column="0" Grid.Row="1" Margin="40">
+            <Grid.Background>
+                <ImageBrush ImageSource="Resources/grass.png"/>
+            </Grid.Background>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Image Name="Img_0_0" Grid.Column="0" Grid.Row="0" Source="/Resources/soil.png"/>
+            <Image Name="Img_0_1" Grid.Column="0" Grid.Row="1" Source="/Resources/soil.png"/>
+            <Image Name="Img_0_2" Grid.Column="0" Grid.Row="2" Source="/Resources/soil.png"/>
+            <Image Name="Img_0_3" Grid.Column="0" Grid.Row="3" Source="/Resources/soil.png"/>
+            <Image Name="Img_1_0" Grid.Column="1" Grid.Row="0" Source="/Resources/soil.png"/>
+            <Image Name="Img_1_1" Grid.Column="1" Grid.Row="1" Source="/Resources/soil.png"/>
+            <Image Name="Img_1_2" Grid.Column="1" Grid.Row="2" Source="/Resources/soil.png"/>
+            <Image Name="Img_1_3" Grid.Column="1" Grid.Row="3" Source="/Resources/soil.png"/>
+            <Image Name="Img_2_0" Grid.Column="2" Grid.Row="0" Source="/Resources/soil.png"/>
+            <Image Name="Img_2_1" Grid.Column="2" Grid.Row="1" Source="/Resources/soil.png"/>
+            <Image Name="Img_2_2" Grid.Column="2" Grid.Row="2" Source="/Resources/soil.png"/>
+            <Image Name="Img_2_3" Grid.Column="2" Grid.Row="3" Source="/Resources/soil.png"/>
+            <Image Name="Img_3_0" Grid.Column="3" Grid.Row="0" Source="/Resources/soil.png"/>
+            <Image Name="Img_3_1" Grid.Column="3" Grid.Row="1" Source="/Resources/soil.png"/>
+            <Image Name="Img_3_2" Grid.Column="3" Grid.Row="2" Source="/Resources/soil.png"/>
+            <Image Name="Img_3_3" Grid.Column="3" Grid.Row="3" Source="/Resources/soil.png"/>
+        </Grid>
+
+
+        <!-- Operations -->
+        <StackPanel Grid.Column="1" Grid.Row="1" >
+            <TextBlock Text="Coordinates (x y)       (0 - 3)" Margin="10"/>
             <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width ="*" />
-                    <ColumnDefinition Width ="*" />
-                    <ColumnDefinition Width ="2*" />
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="50"/>
+                    <ColumnDefinition Width="100"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock Name="DayCounter"  Grid.Column="0" Text="Day : 0" FontSize="40" HorizontalAlignment="Center" VerticalAlignment="Center" />
-                <Button Name="NextDayButton"  Grid.Column="1" Margin="20" Content="Next Day" FontSize="30" Click="NextDayButton_Click" />
-                <TextBlock Name="MoneyCounter" Grid.Column="2"  Text="Money : 2000" FontSize="40" Margin="0 0 100 0 " HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                <StackPanel Grid.Column="0">
+                    <TextBox Name="CoorX"  Text="{Binding ElementName=SliderX, Path=Value, UpdateSourceTrigger=PropertyChanged}"  
+                             HorizontalAlignment="Center" VerticalAlignment="Center" Width="68" Height="30" TextAlignment="Center" FontSize="18" />
+                    <Slider IsSnapToTickEnabled="True" Name="SliderX" Minimum="0" Maximum="3"/>
+                </StackPanel>
+                <StackPanel Grid.Column="2">
+                    <TextBox Name="CoorY" Text="{Binding ElementName=SliderY, Path=Value, UpdateSourceTrigger=PropertyChanged}" 
+                             HorizontalAlignment="Center" VerticalAlignment="Center" Width="68" Height="30" TextAlignment="Center" FontSize="18"/>
+                    <Slider IsSnapToTickEnabled="True" Name="SliderY" Minimum="0" Maximum="3"/>
+                </StackPanel>
             </Grid>
+            <TextBlock Text="Co zbudować ?" Margin="10"/>
+            <ComboBox Name="ComboBoks" Text="Wybierz budynek..." Margin="10" SelectedIndex="0">
+                <!-- KIEDYS ZAMIENIC NA ENUM-->
+                <ComboBoxItem Content="1. Kamieniołm"/>
+                <ComboBoxItem Content="2. Chatka Drwala" />
+                <ComboBoxItem Content="3. Tartak"/>
+                <ComboBoxItem Content="4. Kopalnia Zlota"/>
+                <ComboBoxItem Content="5. Mennica" />
+            </ComboBox>
+            <Button Name="BuildNow" Content="Buduj !"  Margin="10" />
+
 
             <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="3*"/>
+                    <ColumnDefinition Width="2*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <!-- Mapa -->
-                <Grid Grid.Column="0">
-                    <Grid Margin="50">
-                        <Grid.Background>
-                            <ImageBrush ImageSource="grass.png" Opacity="0.8"/>
-                        </Grid.Background>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="*"/>
-                        </Grid.RowDefinitions>
-
-                        <Image Name="Img_0_0" Grid.Column="0" Grid.Row="0" Source="SOIL.png"/>
-                        <Image Name="Img_0_1" Grid.Column="0" Grid.Row="1" Source="SOIL.png"/>
-                        <Image Name="Img_0_2" Grid.Column="0" Grid.Row="2" Source="SOIL.png"/>
-                        <Image Name="Img_0_3" Grid.Column="0" Grid.Row="3" Source="SOIL.png"/>
-                        <Image Name="Img_1_0" Grid.Column="1" Grid.Row="0" Source="SOIL.png"/>
-                        <Image Name="Img_1_1" Grid.Column="1" Grid.Row="1" Source="SOIL.png"/>
-                        <Image Name="Img_1_2" Grid.Column="1" Grid.Row="2" Source="SOIL.png"/>
-                        <Image Name="Img_1_3" Grid.Column="1" Grid.Row="3" Source="SOIL.png"/>
-                        <Image Name="Img_2_0" Grid.Column="2" Grid.Row="0" Source="SOIL.png"/>
-                        <Image Name="Img_2_1" Grid.Column="2" Grid.Row="1" Source="SOIL.png"/>
-                        <Image Name="Img_2_2" Grid.Column="2" Grid.Row="2" Source="SOIL.png"/>
-                        <Image Name="Img_2_3" Grid.Column="2" Grid.Row="3" Source="SOIL.png"/>
-                        <Image Name="Img_3_0" Grid.Column="3" Grid.Row="0" Source="SOIL.png"/>
-                        <Image Name="Img_3_1" Grid.Column="3" Grid.Row="1" Source="SOIL.png"/>
-                        <Image Name="Img_3_2" Grid.Column="3" Grid.Row="2" Source="SOIL.png"/>
-                        <Image Name="Img_3_3" Grid.Column="3" Grid.Row="3" Source="SOIL.png"/>
-
-                    </Grid>
-                </Grid>
-
-                <!-- Operations -->
-                <Grid Grid.Column="1">
-                    <StackPanel>
-                        <TextBlock Text="Coordinates (x y)       (0 - 3)" Margin="10"/>
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="78"/>
-                                <ColumnDefinition Width="39*"/>
-                                <ColumnDefinition Width="78*"/>
-                                <ColumnDefinition Width="23*"/>
-                            </Grid.ColumnDefinitions>
-                            <StackPanel Grid.Column="0">
-                                <TextBox Name="CoorX"  Text="{Binding ElementName=SliderX, Path=Value,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  HorizontalAlignment="Center" VerticalAlignment="Center" Width="68" Height="30" TextAlignment="Center" FontSize="18" />
-                                <Slider IsSnapToTickEnabled="True" Name="SliderX" Minimum="0" Maximum="3"/>
-                            </StackPanel>
-                            <StackPanel Grid.Column="2">
-                                <TextBox Name="CoorY" Text="{Binding ElementName=SliderY, Path=Value,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="68" Height="30" TextAlignment="Center" FontSize="18"/>
-                                <Slider IsSnapToTickEnabled="True" Name="SliderY" Minimum="0" Maximum="3"/>
-                            </StackPanel>
-                            </Grid>
-                        <TextBlock Text="Co budować ?" Margin="10"/>
-                        <ComboBox Name="ComboBoks" Text="Wybierz budynek..." Margin="10" SelectedIndex="0" >
-                            <ComboBoxItem Content="1. Kamieniolom"/>
-                            <ComboBoxItem Content="2. Chatka Drwala" />
-                            <ComboBoxItem Content="3. Tartak"/>
-                            <ComboBoxItem Content="4. Kopalnia Zlota"/>
-                            <ComboBoxItem Content="5. Mennica" />
-                        </ComboBox>
-                        <Button Name="BuildNow" Content="Buduj !"  Margin="10" Click="BuildNow_Click"/>
-
-
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="2*"/>
-                                <ColumnDefinition Width="*"/>
-                            </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="*"/>
-                                <RowDefinition Height="*"/>
-                                <RowDefinition Height="*"/>
-                                <RowDefinition Height="*"/>
-                                <RowDefinition Height="*"/>
-                            </Grid.RowDefinitions>
-                            <Label Content="Kamieniolom" Grid.Column="0" Grid.Row="0" />
-                            <TextBlock Name="CountQuarry" Text="0" Grid.Column="1" TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                            <Label Content="Chatka drwala" Grid.Column="0" Grid.Row="1"/>
-                            <TextBlock Name="CountWoodcutter" Grid.Column="1" Grid.Row="1" Text="0" TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                            <Label Content="Tartak" Grid.Column="0" Grid.Row="2"/>
-                            <TextBlock Name="CountSawmil" Grid.Column="1" Grid.Row="2" Text="0" TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                            <Label Content="Kopalnia Złota" Grid.Column="0" Grid.Row="3"/>
-                            <TextBlock Name="CountGoldMine" Grid.Column="1" Grid.Row="3" Text="0" TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                            <Label Content="Mennica" Grid.Column="0" Grid.Row="4"/>
-                            <TextBlock Name="CountMint" Grid.Column="1" Grid.Row="4" Text="0" TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                        </Grid>
-                    </StackPanel>
-
-                </Grid> 
-
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Label Content="Kamieniolom" Grid.Column="0" Grid.Row="0" />
+                <TextBlock Name="CountQuarry" Text="0" Grid.Column="1" TextAlignment="Center" 
+                           HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Label Content="Chatka drwala" Grid.Column="0" Grid.Row="1"/>
+                <TextBlock Name="CountWoodcutter" Grid.Column="1" Grid.Row="1" Text="0" TextAlignment="Center" 
+                           HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Label Content="Tartak" Grid.Column="0" Grid.Row="2"/>
+                <TextBlock Name="CountSawmil" Grid.Column="1" Grid.Row="2" Text="0" TextAlignment="Center" 
+                           HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Label Content="Kopalnia Złota" Grid.Column="0" Grid.Row="3"/>
+                <TextBlock Name="CountGoldMine" Grid.Column="1" Grid.Row="3" Text="0" TextAlignment="Center" 
+                           HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Label Content="Mennica" Grid.Column="0" Grid.Row="4"/>
+                <TextBlock Name="CountMint" Grid.Column="1" Grid.Row="4" Text="0" TextAlignment="Center" 
+                           HorizontalAlignment="Center" VerticalAlignment="Center"/>
             </Grid>
-
-
         </StackPanel>
-    </Border>
+
+        <!-- Credits -->
+        <Label Content="Building icons designed by from Flaticon" VerticalAlignment="Bottom" HorizontalAlignment="Right" 
+               Margin="10" Grid.Column="2" Grid.Row="2"/>
+    </Grid>
+
 </Window>
 
 

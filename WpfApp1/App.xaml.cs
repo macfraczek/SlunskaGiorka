@@ -15,33 +15,5 @@ namespace WpfApp1
     /// </summary>
     public partial class App : Application
     {
-        public string text="policja";
-        public string Text
-        {
-            get { return this.text; }
-            set
-            {
-                this.text = value;      
-                this.OnPropertyChanged(nameof(this.Text));
-            }
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        public void OnPropertyChanged(string property)
-        {
-            this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(property));
-        }
-
-
-
-
-
-
-
-
-
-
-
-
     }
 }

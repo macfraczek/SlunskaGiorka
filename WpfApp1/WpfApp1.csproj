@@ -70,6 +70,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -88,6 +89,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ViewModel\GraViewModel.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -102,6 +104,11 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Model\Building.cs" />
+    <Compile Include="Model\Enums.cs" />
+    <Compile Include="Model\Gra.cs" />
+    <Compile Include="Model\MapOfGame.cs" />
+    <Compile Include="Model\StateOfGame.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -116,7 +123,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
+      <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
@@ -135,25 +142,14 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="gold-mine.png" />
+    <Resource Include="Resources\axe.png" />
+    <Resource Include="Resources\dollar.png" />
+    <Resource Include="Resources\gold mine.png" />
+    <Resource Include="Resources\grass.png" />
+    <Resource Include="Resources\hut.png" />
+    <Resource Include="Resources\quarry.png" />
+    <Resource Include="Resources\soil.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Resource Include="GoldenAnvil.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Forrest.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="quarry.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="sawmil.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="SOIL.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="grass.png" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
