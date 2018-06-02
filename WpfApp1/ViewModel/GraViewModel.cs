@@ -6,25 +6,56 @@ using System.Threading.Tasks;
 
 namespace WpfApp1.ViewModel
 {
+    using System.ComponentModel;
     using WpfApp1.Model;
+    using WpfApp1.Commands;
+    using System.Windows.Input;
 
-    class GraViewModel
+    class GraViewModel: INotifyPropertyChanged
     {
         Gra _gra = new Gra();
 
-        public String DayInGame { get { return String.Format("Dzień: {0}", _gra.Day); } }
-        public String MoneyInGame { get { return String.Format("Monety: {0}", _gra.Money); } }
+        public String DayInGame { get { return String.Format("Dziyń: {0}", _gra.Day); } }
+        public String MoneyInGame { get { return String.Format("Miedźioki: {0}", _gra.Money); } }
+        public string[] ImgPath { get => _gra.ImgPath; }
+        public NewDayCommand NextDay { get; set ; }
+        public ICommand BuildNowCommand { get; set; }
+        public int NumerOfQuarry { get => Quarry.Instance.Count; }
+        public int NumerOfWoodCutter { get => Woodcutter.Instance.Count; }
+        public int NumerOfSawmill { get => Sawmill.Instance.Count; }
+        public int NumerOfGoldMine { get => GoldMine.Instance.Count; }
+        public int NumerOfMint { get => Mint.Instance.Count; }
 
-        /*Image[,] linkImage = new Image[4, 4];
-        Building _building;
 
-
-        private void NextDayButton_Click(object sender, RoutedEventArgs e)
+        public GraViewModel()
         {
-            DayCounter.Text = "Day : " + gra1.NextDay().ToString();
-            MoneyCounter.Text = "Money : " + gra1.CountMoney().ToString();
+            NextDay = new NewDayCommand(NewDayVM);
+            BuildNowCommand = new BuildCommand(BuildVM);
+        }
+        
+        private void NewDayVM()
+        {
+            _gra.NewDay();
+            OnPropertyChanged("DayInGame");
+            OnPropertyChanged("MoneyInGame");
+        }
+        private void BuildVM()
+        {
+            System.Windows.MessageBox.Show("Sorry,not implemented yet :(", "under developing",
+                System.Windows.MessageBoxButton.OK,System.Windows.MessageBoxImage.Information);
         }
 
+
+
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        private void OnPropertyChanged(string prop)
+        {
+            if (PropertyChanged != null)
+                PropertyChanged(this, new PropertyChangedEventArgs(prop));
+        }
+
+        /*
         private void BuildNow_Click(object sender, RoutedEventArgs e)
         {
             int x, y;

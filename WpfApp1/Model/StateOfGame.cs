@@ -14,7 +14,7 @@ namespace WpfApp1.Model
         public StateOfGame()
         {
             Day = 1;
-            Money = 2000;
+            Money = (int)Config.StartMoneyValue;
         }
     }
 }

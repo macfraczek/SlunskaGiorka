@@ -11,33 +11,9 @@ namespace WpfApp1.Model
         public string Name { get; protected set; }
         public int Income { get; protected set; }
         public int Cost { get; protected set; }
-        public int Count { get; protected set; }
-        public Uri ImageMy { get; protected set; }
-
-
-        public bool BuildNow(int x, int y, Gra gra, Builds name)
-        {
-            if (!gra.IsEmptyField(x, y))
-            {
-                //MessageBox.Show("Tam juz jest jakis budynek ! ://");
-                return false;
-            }
-            else
-            {
-                if (gra.GetMoney() < this.Cost)
-                {
-                    //MessageBox.Show("Za mało pieniążków");
-                    return false;
-                }
-                //MessageBox.Show("Budynek zostanie postawiony, prezez sie zgodzil !");
-                gra.SetField(x, y, name);
-                gra.UseMoney(Cost);
-                Count++;
-                return true;
-            }
-
-        }
-        
+        public int Count { get; set; }
+        public virtual string ImagePath { get; protected set; }
+                                 = (@"\Resources\soil.png");
     }
 
     class Quarry : Building
@@ -48,7 +24,7 @@ namespace WpfApp1.Model
             Income = 200;
             Cost = 500;
             Count = 0;
-            ImageMy = new Uri(@"\Resources\quarry.png");
+            ImagePath = (@"\Resources\quarry.png");
         }
 
         private static Quarry instance;
@@ -73,7 +49,7 @@ namespace WpfApp1.Model
             Income = 300;
             Cost = 1500;
             Count = 0;
-            ImageMy = new Uri(@"C:\Users\macfr\source\repos\WpfApp1\WpfApp1\Forrest.png");
+            ImagePath = (@"\Resources\axe.png");
         }
 
         private static Woodcutter instance;
@@ -97,7 +73,7 @@ namespace WpfApp1.Model
             Income = 500;
             Cost = 3000;
             Count = 0;
-            ImageMy = new Uri(@"C:\Users\macfr\source\repos\WpfApp1\WpfApp1\sawmil.png");
+            ImagePath = (@"\Resources\hut.png");
         }
 
         private static Sawmill instance;
@@ -121,7 +97,7 @@ namespace WpfApp1.Model
             Income = 1000;
             Cost = 5000;
             Count = 0;
-            ImageMy = new Uri(@"C:\Users\macfr\source\repos\WpfApp1\WpfApp1\gold-mine.png");
+            ImagePath = (@"\Resources\gold mine.png");
         }
         private static GoldMine instance;
         public static GoldMine Instance
@@ -144,7 +120,7 @@ namespace WpfApp1.Model
             Income = 3000;
             Cost = 10000;
             Count = 0;
-            ImageMy = new Uri(@"C:\Users\macfr\source\repos\WpfApp1\WpfApp1\GoldenAnvil.png");
+            ImagePath = (@"\Resources\dollar.png");
         }
 
         private static Mint instance;

@@ -6,37 +6,45 @@
         xmlns:local="clr-namespace:WpfApp1"
         xmlns:vm="clr-namespace:WpfApp1.ViewModel"
         mc:Ignorable="d"
-        Title="Giorka" Height="700" Width="900" ResizeMode="NoResize">
+        Title="Slunska Giorka" Height="700" Width="900" ResizeMode="NoResize"
+        Background="AliceBlue">
 
-        <Grid Background="White" >
+    <Grid  Margin="10">
+        <Grid.DataContext>
+            <vm:GraViewModel/>
+        </Grid.DataContext>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width ="600" />
-            <ColumnDefinition Width ="Auto" />
+            <ColumnDefinition Width ="2*" />
+            <ColumnDefinition Width ="1*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="100"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="6*"/>
         </Grid.RowDefinitions>
 
         <!-- Statistics -->
-        <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Height="100" VerticalAlignment="Top">
+        <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="100" Height="100" 
+              VerticalAlignment="Center" HorizontalAlignment="Stretch" >
             <Grid.DataContext>
                 <vm:GraViewModel/>
             </Grid.DataContext>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width ="*" />
-                <ColumnDefinition Width ="*" />
-                <ColumnDefinition Width ="*" />
+                <ColumnDefinition Width ="200" />
+                <ColumnDefinition Width ="300" />
+                <ColumnDefinition Width ="400" />
             </Grid.ColumnDefinitions>
-            <TextBlock Grid.Column="0" Text="{Binding DayInGame}" 
+            <TextBlock Grid.Column="0" Text="{Binding DayInGame, Mode=OneWay}" 
                        FontSize="40" HorizontalAlignment="Center" VerticalAlignment="Center" />
-            <Button Name="NextDayButton"  Grid.Column="1" Margin="20" Content="Next Day" FontSize="30"/>
-            <TextBlock Grid.Column="2"  Text="{Binding MoneyInGame}" 
-                       FontSize="40" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+            <Button  Grid.Column="1" Margin="20" Content="Zejtra" FontSize="30"
+                    Command="{Binding NextDay}" Background="IndianRed" 
+                    HorizontalAlignment="Center" VerticalAlignment="Center"
+                     Width="200" Height="60"/>
+            <TextBlock Grid.Column="2"  Text="{Binding MoneyInGame, Mode=OneWay}" 
+                       FontSize="40" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         </Grid>
 
         <!-- Map -->
-        <Grid Grid.Column="0" Grid.Row="1" Margin="40">
+        <Grid Grid.Column="0" Grid.Row="1" Margin="20">
             <Grid.Background>
                 <ImageBrush ImageSource="Resources/grass.png"/>
             </Grid.Background>
@@ -53,58 +61,67 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
-            <Image Name="Img_0_0" Grid.Column="0" Grid.Row="0" Source="/Resources/soil.png"/>
-            <Image Name="Img_0_1" Grid.Column="0" Grid.Row="1" Source="/Resources/soil.png"/>
-            <Image Name="Img_0_2" Grid.Column="0" Grid.Row="2" Source="/Resources/soil.png"/>
-            <Image Name="Img_0_3" Grid.Column="0" Grid.Row="3" Source="/Resources/soil.png"/>
-            <Image Name="Img_1_0" Grid.Column="1" Grid.Row="0" Source="/Resources/soil.png"/>
-            <Image Name="Img_1_1" Grid.Column="1" Grid.Row="1" Source="/Resources/soil.png"/>
-            <Image Name="Img_1_2" Grid.Column="1" Grid.Row="2" Source="/Resources/soil.png"/>
-            <Image Name="Img_1_3" Grid.Column="1" Grid.Row="3" Source="/Resources/soil.png"/>
-            <Image Name="Img_2_0" Grid.Column="2" Grid.Row="0" Source="/Resources/soil.png"/>
-            <Image Name="Img_2_1" Grid.Column="2" Grid.Row="1" Source="/Resources/soil.png"/>
-            <Image Name="Img_2_2" Grid.Column="2" Grid.Row="2" Source="/Resources/soil.png"/>
-            <Image Name="Img_2_3" Grid.Column="2" Grid.Row="3" Source="/Resources/soil.png"/>
-            <Image Name="Img_3_0" Grid.Column="3" Grid.Row="0" Source="/Resources/soil.png"/>
-            <Image Name="Img_3_1" Grid.Column="3" Grid.Row="1" Source="/Resources/soil.png"/>
-            <Image Name="Img_3_2" Grid.Column="3" Grid.Row="2" Source="/Resources/soil.png"/>
-            <Image Name="Img_3_3" Grid.Column="3" Grid.Row="3" Source="/Resources/soil.png"/>
+
+            <Image Grid.Column="0" Grid.Row="0" Source="{Binding ImgPath[0]}" Margin="10"/>
+            <Image Grid.Column="0" Grid.Row="1" Source="{Binding ImgPath[4]}" Margin="10"/>
+            <Image Grid.Column="0" Grid.Row="2" Source="{Binding ImgPath[8]}" Margin="10"/>
+            <Image Grid.Column="0" Grid.Row="3" Source="{Binding ImgPath[12]}" Margin="10"/>
+            <Image Grid.Column="1" Grid.Row="0" Source="{Binding ImgPath[1]}" Margin="10"/>
+            <Image Grid.Column="1" Grid.Row="1" Source="{Binding ImgPath[5]}" Margin="10"/>
+            <Image Grid.Column="1" Grid.Row="2" Source="{Binding ImgPath[9]}" Margin="10"/>
+            <Image Grid.Column="1" Grid.Row="3" Source="{Binding ImgPath[13]}" Margin="10"/>
+            <Image Grid.Column="2" Grid.Row="0" Source="{Binding ImgPath[2]}" Margin="10"/>
+            <Image Grid.Column="2" Grid.Row="1" Source="{Binding ImgPath[6]}" Margin="10"/>
+            <Image Grid.Column="2" Grid.Row="2" Source="{Binding ImgPath[10]}" Margin="10"/>
+            <Image Grid.Column="2" Grid.Row="3" Source="{Binding ImgPath[14]}" Margin="10"/>
+            <Image Grid.Column="3" Grid.Row="0" Source="{Binding ImgPath[3]}" Margin="10"/>
+            <Image Grid.Column="3" Grid.Row="1" Source="{Binding ImgPath[7]}" Margin="10"/>
+            <Image Grid.Column="3" Grid.Row="2" Source="{Binding ImgPath[11]}" Margin="10"/>
+            <Image Grid.Column="3" Grid.Row="3" Source="{Binding ImgPath[15]}" Margin="10"/>
         </Grid>
 
 
         <!-- Operations -->
-        <StackPanel Grid.Column="1" Grid.Row="1" >
-            <TextBlock Text="Coordinates (x y)       (0 - 3)" Margin="10"/>
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="100"/>
-                    <ColumnDefinition Width="50"/>
-                    <ColumnDefinition Width="100"/>
-                </Grid.ColumnDefinitions>
-                <StackPanel Grid.Column="0">
-                    <TextBox Name="CoorX"  Text="{Binding ElementName=SliderX, Path=Value, UpdateSourceTrigger=PropertyChanged}"  
-                             HorizontalAlignment="Center" VerticalAlignment="Center" Width="68" Height="30" TextAlignment="Center" FontSize="18" />
-                    <Slider IsSnapToTickEnabled="True" Name="SliderX" Minimum="0" Maximum="3"/>
-                </StackPanel>
-                <StackPanel Grid.Column="2">
-                    <TextBox Name="CoorY" Text="{Binding ElementName=SliderY, Path=Value, UpdateSourceTrigger=PropertyChanged}" 
-                             HorizontalAlignment="Center" VerticalAlignment="Center" Width="68" Height="30" TextAlignment="Center" FontSize="18"/>
-                    <Slider IsSnapToTickEnabled="True" Name="SliderY" Minimum="0" Maximum="3"/>
-                </StackPanel>
-            </Grid>
-            <TextBlock Text="Co zbudować ?" Margin="10"/>
-            <ComboBox Name="ComboBoks" Text="Wybierz budynek..." Margin="10" SelectedIndex="0">
-                <!-- KIEDYS ZAMIENIC NA ENUM-->
-                <ComboBoxItem Content="1. Kamieniołm"/>
-                <ComboBoxItem Content="2. Chatka Drwala" />
-                <ComboBoxItem Content="3. Tartak"/>
-                <ComboBoxItem Content="4. Kopalnia Zlota"/>
-                <ComboBoxItem Content="5. Mennica" />
-            </ComboBox>
-            <Button Name="BuildNow" Content="Buduj !"  Margin="10" />
+        <StackPanel Grid.Column="1" Grid.Row="1" Margin="0,40">
+            <!--Coordinates-->
+            <StackPanel Margin="10" Background="Beige">
+                <TextBlock Text="Kai bauplac?  (x y)   (0 - 3)" Margin="10"
+                           FontSize="18" FontStyle="Italic"/>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="100"/>
+                        <ColumnDefinition Width="50"/>
+                        <ColumnDefinition Width="100"/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.Column="0">
+                        <TextBox Name="CoorX"  Text="{Binding ElementName=SliderX, Path=Value, UpdateSourceTrigger=PropertyChanged}"  
+                                 HorizontalAlignment="Center" VerticalAlignment="Center" Width="70" Height="30" TextAlignment="Center" FontSize="18" />
+                        <Slider IsSnapToTickEnabled="True" Name="SliderX" Minimum="0" Maximum="3"/>
+                    </StackPanel>
+                    <StackPanel Grid.Column="2">
+                        <TextBox Name="CoorY" Text="{Binding ElementName=SliderY, Path=Value, UpdateSourceTrigger=PropertyChanged}" 
+                                 HorizontalAlignment="Center" VerticalAlignment="Center" Width="70" Height="30" TextAlignment="Center" FontSize="18"/>
+                        <Slider IsSnapToTickEnabled="True" Name="SliderY" Minimum="0" Maximum="3"/>
+                    </StackPanel>
+                </Grid>
+            </StackPanel>
+            
+            <!-- What's build section-->
+            <StackPanel Margin="10" Background="Beige">
+                <TextBlock Text="Cosi stawiać ?" Margin="10" FontSize="18" FontStyle="Italic"/>
+                <ComboBox Text="Wybierz budynek..." Margin="10" SelectedIndex="0">
+                    <!-- KIEDYS ZAMIENIC NA ENUM-->
+                    <ComboBoxItem Content="1. Kamieniołm"/>
+                    <ComboBoxItem Content="2. Chatka Drwala" />
+                    <ComboBoxItem Content="3. Tartak"/>
+                    <ComboBoxItem Content="4. Kopalnia Zlota"/>
+                    <ComboBoxItem Content="5. Mennica" />
+                </ComboBox>
+                <Button Command="{Binding BuildNowCommand}" Content="Buduj !"  Margin="10" />
+            </StackPanel>
 
-
-            <Grid>
+            <!-- Statistics -->
+            <Grid Background="Beige" Margin="10" >
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="2*"/>
                     <ColumnDefinition Width="*"/>
@@ -117,21 +134,25 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 <Label Content="Kamieniolom" Grid.Column="0" Grid.Row="0" />
-                <TextBlock Name="CountQuarry" Text="0" Grid.Column="1" TextAlignment="Center" 
+                <TextBlock Text="{Binding NumerOfQuarry}" Grid.Column="1" TextAlignment="Center" 
                            HorizontalAlignment="Center" VerticalAlignment="Center"/>
                 <Label Content="Chatka drwala" Grid.Column="0" Grid.Row="1"/>
-                <TextBlock Name="CountWoodcutter" Grid.Column="1" Grid.Row="1" Text="0" TextAlignment="Center" 
+                <TextBlock Grid.Column="1" Grid.Row="1" 
+                           Text="{Binding NumerOfWoodCutter}" TextAlignment="Center" 
                            HorizontalAlignment="Center" VerticalAlignment="Center"/>
                 <Label Content="Tartak" Grid.Column="0" Grid.Row="2"/>
-                <TextBlock Name="CountSawmil" Grid.Column="1" Grid.Row="2" Text="0" TextAlignment="Center" 
+                <TextBlock Grid.Column="1" Grid.Row="2" Text="{Binding NumerOfSawmill}" 
+                           TextAlignment="Center" 
                            HorizontalAlignment="Center" VerticalAlignment="Center"/>
                 <Label Content="Kopalnia Złota" Grid.Column="0" Grid.Row="3"/>
-                <TextBlock Name="CountGoldMine" Grid.Column="1" Grid.Row="3" Text="0" TextAlignment="Center" 
+                <TextBlock Grid.Column="1" Grid.Row="3" Text="{Binding NumerOfGoldMine}"
+                           TextAlignment="Center" 
                            HorizontalAlignment="Center" VerticalAlignment="Center"/>
                 <Label Content="Mennica" Grid.Column="0" Grid.Row="4"/>
-                <TextBlock Name="CountMint" Grid.Column="1" Grid.Row="4" Text="0" TextAlignment="Center" 
+                <TextBlock Grid.Column="1" Grid.Row="4" Text="{Binding NumerOfMint}"
+                           TextAlignment="Center" 
                            HorizontalAlignment="Center" VerticalAlignment="Center"/>
-            </Grid>
+               </Grid>
         </StackPanel>
 
         <!-- Credits -->

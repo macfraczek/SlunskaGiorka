@@ -15,4 +15,12 @@ namespace WpfApp1.Model
         GoldMine,
         Mint
     };
+
+    enum Config
+    {
+        BuildingsCount = 16,
+        BuildingsCountRow = 4,
+        BuildingsCountColumn = 4,
+        StartMoneyValue=2000
+    }
 }
