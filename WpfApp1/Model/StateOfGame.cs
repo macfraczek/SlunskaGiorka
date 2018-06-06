@@ -9,12 +9,16 @@ namespace WpfApp1.Model
     class StateOfGame
     {
         public int Day { set; get; }
-        public int Money { set; get; }
+        public int Money { get; set; }
 
         public StateOfGame()
         {
             Day = 1;
             Money = (int)Config.StartMoneyValue;
+        }
+        public void PayForBuilding(int prize)
+        {
+            Money -= prize;
         }
     }
 }

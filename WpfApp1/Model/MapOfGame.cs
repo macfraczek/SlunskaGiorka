@@ -27,25 +27,30 @@ namespace WpfApp1.Model
                     break;
                 case Builds.Quarry:
                     Field[x, y] = Quarry.Instance;
+                    Quarry.Instance.Count++;
                     break;
                 case Builds.Woodcutter:
                     Field[x, y] = Woodcutter.Instance;
+                    Woodcutter.Instance.Count++;
                     break;
                 case Builds.Sawmill:
                     Field[x, y] = Sawmill.Instance;
+                    Sawmill.Instance.Count++;
                     break;
                 case Builds.GoldMine:
                     Field[x, y] = GoldMine.Instance;
+                    GoldMine.Instance.Count++;
                     break;
                 case Builds.Mint:
                     Field[x, y] = Mint.Instance;
+                    Mint.Instance.Count++;
                     break;
                 default:
+                    System.Windows.MessageBox.Show("Sth goes wrong with building select :(\n", "ERROR",
+                        System.Windows.MessageBoxButton.OK);
                     break;
             }
-
         }
-
         public bool IsEmptyField(int x, int y)
         {
             bool result = false;
@@ -53,29 +58,17 @@ namespace WpfApp1.Model
                 result = true;
             return result;
         }
-
         public bool BuildNow(int x, int y, Builds name)
         {
-            if (!IsEmptyField(x, y))
+            bool _IsEmptyField = IsEmptyField(x, y);
+
+            if (_IsEmptyField)
             {
-                //System.Windows.MessageBox.Show("Tam juz jest jakis budynek ! ://");
-                throw new SomeBuildingIsAlreadyThereException();
-                return false;
-            }
-            else
-            {
-                if (0==1 )
-                {
-                    //MessageBox.Show("Za mało pieniążków");
-                    return false;
-                }
-                //MessageBox.Show("Budynek zostanie postawiony, prezez sie zgodzil !");
-                //gra.SetField(x, y, name);
-                //gra.UseMoney(Cost);
-                //Count++;
+                SetField(x, y, name);
                 return true;
             }
-
+            else
+                return false;
         }
     }
 }

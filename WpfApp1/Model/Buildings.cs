@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WpfApp1.Model
 {
-    abstract class Building
+    public abstract class Building
     {
         public string Name { get; protected set; }
         public int Income { get; protected set; }
@@ -16,7 +16,7 @@ namespace WpfApp1.Model
                                  = (@"\Resources\soil.png");
     }
 
-    class Quarry : Building
+    public class Quarry : Building
     {
         private Quarry()
         {
@@ -41,7 +41,7 @@ namespace WpfApp1.Model
         }
 
     }
-    class Woodcutter : Building
+    public class Woodcutter : Building
     {
         private Woodcutter()
         {
@@ -65,7 +65,7 @@ namespace WpfApp1.Model
             }
         }
     }
-    class Sawmill : Building
+    public class Sawmill : Building
     {
         private Sawmill()
         {
@@ -89,7 +89,7 @@ namespace WpfApp1.Model
             }
         }
     }
-    class GoldMine : Building
+    public class GoldMine : Building
     {
         private GoldMine()
         {
@@ -112,7 +112,7 @@ namespace WpfApp1.Model
             }
         }
     }
-    class Mint : Building
+    public class Mint : Building
     {
         private Mint()
         {

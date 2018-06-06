@@ -12,14 +12,14 @@ namespace WpfApp1.Model
         private StateOfGame stan;
         private MapOfGame mapka;
         
+        // IMG PATH DO POPRAWKI
+
 
         public int Day { get => stan.Day; }
-        public int Money { get => stan.Money; }
+        public int Money { get => stan.Money; private set => stan.Money=value; }
         public string[] ImgPath {
             get {
                 string[] ListOfImgPath = new string[(int) Config.BuildingsCount];
-                mapka.SetField(0,0,Builds.Quarry);
-
                 for (int i = 0; i < (int)Config.BuildingsCount; i++)
                 {
                     if (mapka.Field[i / (int)Config.BuildingsCountColumn, i % (int)Config.BuildingsCountColumn]
@@ -57,8 +57,35 @@ namespace WpfApp1.Model
             result += Mint.Instance.Income * Mint.Instance.Count;
             return result;
         }
+        public bool IsEmptyField(int x,int y)
+        {
+            return mapka.IsEmptyField(x,y);
+        }
+        public void SetField(int x, int y, Builds name)
+        {
+            mapka.SetField(x, y, name);
+        }
+        public void PayForBuild(int prize)
+        {
+            if (prize > 0)
+            {
+                stan.PayForBuilding(prize);
+                System.Windows.MessageBox.Show("good", "");
+            }
+            //else
+                //for(; ; )
+                    //System.Windows.MessageBox.Show("CHEATER","");
+        }
+        public void BuildNow(int x, int y, Builds name)
+        {
+            if (Money > (Mapper.BuildingEnumToBuildingMapper(name)).Cost)
+                if(mapka.BuildNow(x, y, name))
+                    PayForBuild(Mapper.BuildingEnumToBuildingMapper(name).Cost);
+        }
 
 
-        
+
+
+
     }
 }

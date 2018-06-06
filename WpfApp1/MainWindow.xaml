@@ -29,9 +29,9 @@
                 <vm:GraViewModel/>
             </Grid.DataContext>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width ="200" />
-                <ColumnDefinition Width ="300" />
-                <ColumnDefinition Width ="400" />
+                <ColumnDefinition Width ="2*" />
+                <ColumnDefinition Width ="3*" />
+                <ColumnDefinition Width ="4*" />
             </Grid.ColumnDefinitions>
             <TextBlock Grid.Column="0" Text="{Binding DayInGame, Mode=OneWay}" 
                        FontSize="40" HorizontalAlignment="Center" VerticalAlignment="Center" />
@@ -85,7 +85,7 @@
         <StackPanel Grid.Column="1" Grid.Row="1" Margin="0,40">
             <!--Coordinates-->
             <StackPanel Margin="10" Background="Beige">
-                <TextBlock Text="Kai bauplac?  (x y)   (0 - 3)" Margin="10"
+                <TextBlock Text="Kai bauplac?  (x y)" Margin="10"
                            FontSize="18" FontStyle="Italic"/>
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -94,14 +94,16 @@
                         <ColumnDefinition Width="100"/>
                     </Grid.ColumnDefinitions>
                     <StackPanel Grid.Column="0">
-                        <TextBox Name="CoorX"  Text="{Binding ElementName=SliderX, Path=Value, UpdateSourceTrigger=PropertyChanged}"  
+                        <TextBox Text="{Binding ElementName=SliderX, Path=Value, UpdateSourceTrigger=PropertyChanged}"  
                                  HorizontalAlignment="Center" VerticalAlignment="Center" Width="70" Height="30" TextAlignment="Center" FontSize="18" />
-                        <Slider IsSnapToTickEnabled="True" Name="SliderX" Minimum="0" Maximum="3"/>
+                        <Slider Name="SliderX" IsSnapToTickEnabled="True" Minimum="0" Maximum="3"
+                                Value="{Binding BuildX, UpdateSourceTrigger=PropertyChanged}"/>
                     </StackPanel>
                     <StackPanel Grid.Column="2">
-                        <TextBox Name="CoorY" Text="{Binding ElementName=SliderY, Path=Value, UpdateSourceTrigger=PropertyChanged}" 
+                        <TextBox Text="{Binding ElementName=SliderY, Path=Value, UpdateSourceTrigger=PropertyChanged}" 
                                  HorizontalAlignment="Center" VerticalAlignment="Center" Width="70" Height="30" TextAlignment="Center" FontSize="18"/>
-                        <Slider IsSnapToTickEnabled="True" Name="SliderY" Minimum="0" Maximum="3"/>
+                        <Slider Name="SliderY" IsSnapToTickEnabled="True" Minimum="0" Maximum="3" 
+                                Value="{Binding BuildY, UpdateSourceTrigger=PropertyChanged}"  />
                     </StackPanel>
                 </Grid>
             </StackPanel>
@@ -109,14 +111,9 @@
             <!-- What's build section-->
             <StackPanel Margin="10" Background="Beige">
                 <TextBlock Text="Cosi stawiać ?" Margin="10" FontSize="18" FontStyle="Italic"/>
-                <ComboBox Text="Wybierz budynek..." Margin="10" SelectedIndex="0">
-                    <!-- KIEDYS ZAMIENIC NA ENUM-->
-                    <ComboBoxItem Content="1. Kamieniołm"/>
-                    <ComboBoxItem Content="2. Chatka Drwala" />
-                    <ComboBoxItem Content="3. Tartak"/>
-                    <ComboBoxItem Content="4. Kopalnia Zlota"/>
-                    <ComboBoxItem Content="5. Mennica" />
-                </ComboBox>
+                <ComboBox Text="Wybierz budynek..." Margin="10" SelectedIndex="0"
+                          ItemsSource="{Binding BuildsListProvider,Mode=OneTime}"
+                          SelectedItem="{Binding BuildType}"/>
                 <Button Command="{Binding BuildNowCommand}" Content="Buduj !"  Margin="10" />
             </StackPanel>
 

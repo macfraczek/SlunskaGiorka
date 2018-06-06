@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WpfApp1.Model
 {
-    enum Builds
+    public enum Builds
     {
         Soil,
         Quarry,
